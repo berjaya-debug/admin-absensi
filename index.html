@@ -8,19 +8,20 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     :root {
-      --gold:   #d4a017;
-      --gold2:  #f5c842;
-      --dark:   #5c3d00;
-      --darker: #3b2600;
-      --cream:  #fdf8e8;
-      --amber:  #e8952a;
-      --shadow: rgba(180,120,0,0.18);
+      --primary: #1565c0;
+      --light:   #42a5f5;
+      --lighter: #90caf9;
+      --pale:    #bbdefb;
+      --dark:    #0d3c7a;
+      --darker:  #082255;
+      --bg:      #f0f7ff;
+      --shadow:  rgba(21,101,192,0.18);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Nunito', sans-serif;
-      background: var(--cream);
+      background: var(--bg);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -31,8 +32,8 @@
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212,160,23,0.13) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(232,149,42,0.08) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(21,101,192,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(66,165,245,0.07) 0%, transparent 60%);
       pointer-events: none; z-index: 0;
     }
 
@@ -48,7 +49,7 @@
     }
 
     .card-top {
-      background: linear-gradient(145deg, var(--darker) 0%, var(--dark) 60%, #8b5e00 100%);
+      background: linear-gradient(145deg, var(--darker) 0%, var(--dark) 60%, var(--primary) 100%);
       padding: 28px 24px 22px;
       text-align: center;
       position: relative;
@@ -66,22 +67,22 @@
     .logo-ring {
       width: 64px; height: 64px;
       border-radius: 50%;
-      border: 3px solid rgba(245,200,66,0.6);
+      border: 3px solid rgba(144,202,249,0.6);
       display: flex; align-items: center; justify-content: center;
       font-size: 30px;
       margin: 0 auto 12px;
-      background: rgba(245,200,66,0.1);
-      box-shadow: 0 0 0 6px rgba(245,200,66,0.08);
+      background: rgba(144,202,249,0.12);
+      box-shadow: 0 0 0 6px rgba(144,202,249,0.08);
     }
     h1 {
       font-family: 'Cinzel', serif;
-      color: var(--gold2);
+      color: var(--lighter);
       font-size: 19px;
       letter-spacing: 2px;
       text-shadow: 0 2px 8px rgba(0,0,0,0.4);
       margin-bottom: 4px;
     }
-    .sub-title { color: rgba(255,230,150,0.75); font-size: 12px; letter-spacing: 1px; }
+    .sub-title { color: rgba(187,222,251,0.75); font-size: 12px; letter-spacing: 1px; }
 
     .card-body { padding: 24px 22px 26px; }
 
@@ -89,7 +90,7 @@
       display: block;
       font-size: 11px;
       font-weight: 700;
-      color: #9a7a30;
+      color: #1976d2;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 6px;
@@ -99,47 +100,47 @@
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
-      border: 1.5px solid #e8d99a;
+      border: 1.5px solid var(--pale);
       font-size: 14px;
       font-family: 'Nunito', sans-serif;
       font-weight: 600;
       outline: none;
-      background: #fffdf2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b8860b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+      background: #f5faff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231565c0' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
       appearance: none; -webkit-appearance: none;
       color: var(--darker);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,160,23,0.15); }
+    select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(21,101,192,0.12); }
 
     .section-gap { margin-top: 18px; }
 
     .status-container { display: flex; gap: 10px; }
     .status-opt {
       flex: 1; padding: 12px 8px;
-      border: 2px solid #e8d99a;
+      border: 2px solid var(--pale);
       border-radius: 12px;
       text-align: center;
       cursor: pointer;
       font-weight: 700; font-size: 13px;
-      color: #b8860b;
+      color: var(--primary);
       transition: all 0.2s;
-      background: #fffdf2;
+      background: #f5faff;
       user-select: none;
     }
     .status-opt:active { transform: scale(0.97); }
     .status-opt.active {
-      background: linear-gradient(135deg, var(--darker), var(--dark), #a06800);
-      color: #ffd700;
+      background: linear-gradient(135deg, var(--darker), var(--dark), var(--primary));
+      color: var(--lighter);
       border-color: var(--dark);
-      box-shadow: 0 4px 14px rgba(92,61,0,0.3);
+      box-shadow: 0 4px 14px rgba(13,60,122,0.3);
     }
 
     .tugas-box {
       margin-top: 14px;
-      background: #fffbe8;
+      background: #e8f4fd;
       padding: 13px 15px;
       border-radius: 12px;
-      border: 1.5px solid #e8d99a;
+      border: 1.5px solid var(--pale);
       display: flex; align-items: center; gap: 12px;
     }
     .tugas-box input[type="checkbox"] {
@@ -147,25 +148,25 @@
       cursor: pointer; accent-color: var(--dark); flex-shrink: 0;
     }
     .tugas-label { cursor: pointer; font-weight: 700; color: var(--dark); font-size: 13.5px; }
-    .tugas-label small { display: block; font-weight: 400; color: #b09050; font-size: 11.5px; margin-top: 2px; }
+    .tugas-label small { display: block; font-weight: 400; color: #5c8bc4; font-size: 11.5px; margin-top: 2px; }
 
     #previewContainer {
       width: 100%; height: 220px;
-      border: 2px dashed #d4a017;
+      border: 2px dashed var(--primary);
       border-radius: 16px; margin-top: 16px;
       display: flex; align-items: center; justify-content: center;
-      background: #fffdf2; cursor: pointer;
+      background: #f5faff; cursor: pointer;
       overflow: hidden; position: relative;
       transition: background 0.2s;
     }
-    #previewContainer:active { background: #fff8e0; }
+    #previewContainer:active { background: #e3f2fd; }
     #imgPreview { width: 100%; height: 100%; object-fit: cover; display: none; }
-    #placeholderText { text-align: center; color: #c9a030; pointer-events: none; }
+    #placeholderText { text-align: center; color: var(--primary); pointer-events: none; }
     #placeholderText .cam-icon { font-size: 44px; line-height: 1; }
     #placeholderText b { display: block; margin-top: 8px; font-size: 14px; letter-spacing: 0.5px; }
-    #placeholderText small { font-size: 12px; color: #d4b060; margin-top: 4px; display: block; }
+    #placeholderText small { font-size: 12px; color: var(--light); margin-top: 4px; display: block; }
 
-    #gpsStatus { font-size: 12px; text-align: center; margin-top: 10px; min-height: 18px; color: #9a8050; }
+    #gpsStatus { font-size: 12px; text-align: center; margin-top: 10px; min-height: 18px; color: #5c8bc4; }
     #gpsStatus.ok  { color: #2e7d32; }
     #gpsStatus.err { color: #c62828; }
 
@@ -175,9 +176,9 @@
       font-size: 15px; font-weight: 800;
       font-family: 'Nunito', sans-serif;
       letter-spacing: 1px; cursor: pointer;
-      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--amber) 100%);
-      color: #ffd700;
-      box-shadow: 0 5px 20px rgba(92,61,0,0.35);
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--primary) 100%);
+      color: var(--lighter);
+      box-shadow: 0 5px 20px rgba(13,60,122,0.35);
       transition: all 0.2s; position: relative; overflow: hidden;
     }
     .btn-submit::after {
@@ -185,7 +186,7 @@
       position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
     }
-    .btn-submit:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(92,61,0,0.25); }
+    .btn-submit:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(13,60,122,0.25); }
     .btn-submit:disabled { background: #ccc; color: #999; box-shadow: none; cursor: not-allowed; }
 
     #msg { text-align: center; margin-top: 10px; font-weight: 700; font-size: 13px; color: var(--dark); min-height: 18px; }
@@ -254,16 +255,12 @@
   var koordinatGPS = null;
   var gpsLoading   = false;
 
-  const elNama   = document.getElementById('namaStaff');
-  const elGPS    = document.getElementById('gpsStatus');
-  const elBtn    = document.getElementById('btnKirim');
-  const elMsg    = document.getElementById('msg');
+  const elNama = document.getElementById('namaStaff');
+  const elGPS  = document.getElementById('gpsStatus');
+  const elBtn  = document.getElementById('btnKirim');
+  const elMsg  = document.getElementById('msg');
 
-  // ── Init ────────────────────────────────────────────────
-  window.onload = function () {
-    loadStaff();
-    ambilGPS();
-  };
+  window.onload = function () { loadStaff(); ambilGPS(); };
 
   function loadStaff() {
     fetch(GAS_URL + "?action=getStaffList")
@@ -281,14 +278,12 @@
       });
   }
 
-  // ── Status HADIR / PULANG ───────────────────────────────
   function pilihStatus(s) {
     statusAbsen = s;
     document.getElementById('optHadir').classList.toggle('active',  s === 'HADIR');
     document.getElementById('optPulang').classList.toggle('active', s === 'PULANG');
   }
 
-  // ── Foto + Watermark ────────────────────────────────────
   function handleFile(input) {
     if (!input.files || !input.files[0]) return;
     const reader = new FileReader();
@@ -323,7 +318,8 @@
 
         ctx.fillStyle = 'rgba(0,0,0,0.62)';
         ctx.fillRect(0, bxY, canvas.width, bxH);
-        ctx.fillStyle = '#d4a017';
+        // Garis aksen biru
+        ctx.fillStyle = '#1565c0';
         ctx.fillRect(0, bxY, canvas.width, Math.max(3, Math.round(fs * 0.22)));
 
         ctx.textAlign = 'left'; ctx.textBaseline = 'top';
@@ -332,7 +328,7 @@
           if (i === 0) {
             ctx.font = 'bold ' + Math.round(fs * 1.05) + 'px sans-serif';
             ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fillText(teks, pad+1, y+1);
-            ctx.fillStyle = '#FFD700'; ctx.fillText(teks, pad, y);
+            ctx.fillStyle = '#90caf9'; ctx.fillText(teks, pad, y);
           } else {
             ctx.font = (i === 2 ? 'bold ' : '') + fs + 'px sans-serif';
             ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fillText(teks, pad+1, y+1);
@@ -351,7 +347,6 @@
     reader.readAsDataURL(input.files[0]);
   }
 
-  // ── GPS ─────────────────────────────────────────────────
   function ambilGPS() {
     if (!navigator.geolocation) {
       elGPS.textContent = '❌ Browser tidak mendukung GPS'; return;
@@ -385,7 +380,6 @@
     elGPS.className   = 'ok';
   }
 
-  // ── Submit ──────────────────────────────────────────────
   function submitAbsensi() {
     const nama  = elNama.value;
     const tugas = document.getElementById('isTugasKeluar').checked;
@@ -405,8 +399,7 @@
             () => {
               elBtn.disabled = false; elMsg.innerHTML = '';
               Swal.fire("GPS Gagal",
-                "Gagal mendapatkan lokasi.<br><br>" +
-                "Tips:<br>• Aktifkan GPS/Lokasi HP<br>• Izinkan akses lokasi di browser<br>• Coba dekat jendela", "error");
+                "Gagal mendapatkan lokasi.<br><br>Tips:<br>• Aktifkan GPS HP<br>• Izinkan akses lokasi browser<br>• Coba dekat jendela", "error");
             },
             { enableHighAccuracy: false, timeout: 20000, maximumAge: 60000 }
           );
@@ -424,7 +417,7 @@
 
     fetch(GAS_URL, {
       method : 'POST',
-      headers: { 'Content-Type': 'text/plain' }, // text/plain agar tidak trigger CORS preflight
+      headers: { 'Content-Type': 'text/plain' },
       body   : JSON.stringify({
         action       : 'prosesAbsenAdmin',
         lat          : lat,
@@ -445,7 +438,7 @@
           title: 'Berhasil! ⭐',
           html : '<b>' + res.nama + '</b><br>' + res.pesan +
                  '<br><small>Jam: ' + res.jam + ' | Jarak: ' + res.jarak + '</small>',
-          confirmButtonColor: '#b8860b'
+          confirmButtonColor: '#1565c0'
         }).then(() => location.reload());
       } else {
         const err = typeof res === 'string' ? res : (res.error || JSON.stringify(res));
