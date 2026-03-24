@@ -1,81 +1,90 @@
-# 📋 Absensi Divisi Admin
+# 🏢 Absensi Admin - Berjaya Group (PWA)
 
-## Arsitektur
+Aplikasi absensi berbasis **Progressive Web App (PWA)** untuk Divisi Admin Berjaya Group.
+
+---
+
+## 📁 Struktur File
 
 ```
-GitHub Pages          Apps Script (satu URL deploy)
-─────────────         ──────────────────────────────
-index.html            ?page=Admin       → Admin.html
-  │                   ?page=UangMakan   → UangMakan.html
-  │ fetch POST        
-  └──────────────────► doPost → prosesAbsenAdmin()
-  │ fetch GET         
-  └──────────────────► doGet  → getStaffList (JSON)
+/
+├── index.html          ← Halaman utama absensi (SUDAH include PWA)
+├── manifest.json       ← Konfigurasi PWA (nama, icon, warna)
+├── sw.js               ← Service Worker (offline & caching)
+├── favicon.ico         ← Favicon browser
+└── icons/
+    ├── icon-16x16.png
+    ├── icon-32x32.png
+    ├── icon-72x72.png
+    ├── icon-96x96.png
+    ├── icon-128x128.png
+    ├── icon-144x144.png
+    ├── icon-152x152.png
+    ├── icon-180x180.png    ← Apple Touch Icon
+    ├── icon-192x192.png    ← Wajib untuk Android
+    ├── icon-384x384.png
+    └── icon-512x512.png    ← Wajib untuk Splash Screen
 ```
 
-## File
+---
 
-| File | Lokasi | Metode komunikasi |
-|------|--------|-------------------|
-| `index.html` | GitHub Pages | `fetch` POST/GET ke GAS URL |
-| `Admin.html` | Apps Script project | `google.script.run` |
-| `UangMakan.html` | Apps Script project | `google.script.run` |
-| `Code.gs` | Apps Script project | — |
+## 🚀 Cara Upload ke GitHub Pages
+
+### Langkah 1: Upload semua file
+1. Buka repository GitHub Anda
+2. Upload **semua file** di atas ke **root** repository (bukan dalam subfolder)
+3. Pastikan struktur folder `icons/` juga ikut ter-upload
+
+### Langkah 2: Aktifkan GitHub Pages
+1. Buka **Settings** → **Pages**
+2. Source: pilih **Deploy from a branch**
+3. Branch: pilih **main** (atau master), folder **/ (root)**
+4. Klik **Save**
+5. Tunggu beberapa menit, lalu cek link yang diberikan GitHub
+
+### Langkah 3: Test PWA
+1. Buka link GitHub Pages di **Chrome/Samsung Browser** di HP
+2. Akan muncul **banner install** di bawah layar
+3. Klik "Install Sekarang" → app terpasang di Home Screen!
 
 ---
 
-## Setup
+## 📱 Cara Install di HP
 
-### 1. Apps Script
+### Android (Chrome / Samsung Browser)
+- Buka link → muncul banner **"Install Absensi Admin"** otomatis
+- Klik **⬇️ Install Sekarang**
 
-1. Buka [script.google.com](https://script.google.com) → buat project baru
-2. Isi `Code.gs` → ganti `SS_ID_ADMIN` dengan ID spreadsheet Anda
-3. Tambah file HTML baru: **Admin** dan **UangMakan** → paste isi masing-masing
-4. Deploy → **New Deployment** → Web App → Execute as: **Me** → Access: **Anyone**
-5. Copy URL deploy (contoh: `https://script.google.com/macros/s/XXX/exec`)
-
-### 2. index.html (GitHub Pages)
-
-1. Buka `index.html`, ganti baris:
-   ```js
-   const GAS_URL = "https://script.google.com/macros/s/XXXXX/exec";
-   ```
-2. Upload ke repository GitHub → aktifkan GitHub Pages
+### iPhone / iPad (Safari)
+- Buka link di **Safari**
+- Muncul panduan: ketuk **Share** → **"Tambahkan ke Layar Utama"**
+- Ketuk **Tambahkan**
 
 ---
 
-## URL Akses
+## ✅ Fitur PWA
 
-| Halaman | URL |
-|---------|-----|
-| Absensi Staff | `https://username.github.io/repo/` |
-| Data Absensi | `https://script.google.com/macros/s/XXX/exec?page=Admin` |
-| Rekap NBM | `https://script.google.com/macros/s/XXX/exec?page=UangMakan` |
-
----
-
-## Struktur Spreadsheet
-
-### Sheet: `Staff`
-| A (Nama) |
-|----------|
-| Nama Staff 1 |
-
-### Sheet: `Sheet1`
-| A | B | C | D | E | F | G | H | I | J |
-|---|---|---|---|---|---|---|---|---|---|
-| Timestamp | Nama | Lat | Lon | Jarak | Status | Foto | Tipe | Lokasi | **Urgent** |
-
-> Kolom **J**: isi `TRUE` manual untuk lembur Minggu/merah yang urgent (Rp 150.000)
+| Fitur | Status |
+|-------|--------|
+| Install di Home Screen | ✅ |
+| Ikon khusus (logo Berjaya) | ✅ |
+| Nama app: "Absensi Admin" | ✅ |
+| Splash screen | ✅ |
+| Offline caching | ✅ |
+| Banner install otomatis | ✅ |
+| Panduan iOS | ✅ |
+| Theme color ungu | ✅ |
 
 ---
 
-## Aturan NBM
+## 🔧 Konfigurasi
 
-| Hari | Batas normal | Lembur |
-|------|-------------|--------|
-| Senin–Jumat | 17.00 | +2 jam → Rp 30.000 · +4 jam → Rp 60.000 |
-| Sabtu | 15.00 | +2 jam → Rp 30.000 · +4 jam → Rp 60.000 |
-| Minggu | — | Urgent: Rp 150.000 · Non-urgent: Rp 60.000 |
+Edit `manifest.json` untuk mengubah:
+- `name` → nama lengkap aplikasi
+- `short_name` → nama singkat di icon
+- `theme_color` → warna status bar
+- `background_color` → warna splash screen
 
-**NBM harian: Rp 27.500**
+---
+
+*Dibuat untuk Berjaya Group - Divisi Administrasi*
