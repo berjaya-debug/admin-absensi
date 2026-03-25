@@ -298,7 +298,6 @@
     </button>
     <div id="msg"></div>
   </div>
-</div>
 
 <script>
   const GAS_URL = "https://script.google.com/macros/s/AKfycbwhyrMvPa4Lfp9hSMAgjhNrsqhYTiZSSpfavNDhKVMtITTSbBwxvsR_sN-bVD_yVqFp8w/exec";
@@ -498,6 +497,59 @@
      class="footer-link">
      Pengajuan Cuti
   </a>
+  <div id="ios-instruction" style="display:none; margin-top:20px; padding:10px; border:1px dashed #3a0ca3; border-radius:10px; font-size:12px; color:#3a0ca3;">
+  📱 <b>Pengguna iPhone:</b> Klik ikon <img src="https://img.icons8.com/ios/20/3a0ca3/export.png"/> (Share) lalu pilih <b>"Add to Home Screen"</b> untuk memasang aplikasi.
+    </div>
+    
+    <script>
+      // Deteksi jika user memakai iPhone dan tidak sedang membuka mode standalone (PWA)
+      const isIos = () => {
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        return /iphone|ipad|ipod/.test(userAgent);
+      }
+      const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+    
+      if (isIos() && !isInStandaloneMode()) {
+        document.getElementById('ios-instruction').style.display = 'block';
+      }
+    </script>
+
+      <div id="install-banner" style="display:none; position:fixed; bottom:20px; left:20px; right:20px; background:#3a0ca3; color:white; padding:15px; border-radius:12px; z-index:9999; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align:center;">
+        <p style="margin:0 0 10px 0; font-size:14px;">Gunakan aplikasi agar absen lebih stabil</p>
+        <button id="btn-install" style="background:#ffd700; color:#1a0835; border:none; padding:8px 20px; border-radius:5px; font-weight:bold; cursor:pointer;">INSTAL SEKARANG</button>
+      </div>
+      
+      <script>
+      let deferredPrompt;
+      const installBanner = document.getElementById('install-banner');
+      const btnInstall = document.getElementById('btn-install');
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+          // Simpan event agar bisa dipicu lewat tombol kita sendiri
+          e.preventDefault();
+          deferredPrompt = e;
+          // Tampilkan banner buatan kita
+          installBanner.style.display = 'block';
+      });
+      
+      btnInstall.addEventListener('click', (e) => {
+          installBanner.style.display = 'none';
+          if (deferredPrompt) {
+              deferredPrompt.prompt();
+              deferredPrompt.userChoice.then((choiceResult) => {
+                  if (choiceResult.outcome === 'accepted') {
+                      console.log('User menginstal PWA');
+                  }
+                  deferredPrompt = null;
+              });
+          }
+      });
+      
+      // Sembunyikan banner jika aplikasi sudah terinstal (mode standalone)
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+          installBanner.style.display = 'none';
+      }
+      </script>
   
 </body>
 </html>
